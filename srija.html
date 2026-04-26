@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Telugu Aahara Vedhika</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --red: #8B0000;
+    --red-light: #b91c1c;
+    --gold: #c9933a;
+    --gold-light: #f5e0b0;
+    --cream: #fff8ed;
+    --white: #ffffff;
+    --gray: #f5f1ec;
+    --text: #1a1209;
+    --muted: #6b5c3e;
+    --border: #e2d5be;
+    --green: #1a6636;
+    --shadow: 0 2px 16px rgba(139,0,0,0.08);
+    --radius: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top left, rgba(201,147,58,0.14), transparent 26%),
+      radial-gradient(circle at top right, rgba(139,0,0,0.10), transparent 22%),
+      radial-gradient(circle at bottom left, rgba(26,102,54,0.08), transparent 24%),
+      linear-gradient(135deg, #fff8ed 0%, #fff3e2 45%, #fffaf3 100%);
+    background-attachment: fixed;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(139,0,0,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139,0,0,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    opacity: 0.35;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 8%;
+    right: -80px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,147,58,0.16), transparent 70%);
+    filter: blur(2px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  #login-page, #app {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* LOGIN PAGE */
+  #login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(245,224,176,0.14), transparent 20%),
+      radial-gradient(circle at 80% 80%, rgba(255,255,255,0.08), transparent 18%),
+      linear-gradient(135deg, #8B0000 0%, #5c0000 50%, #2d0000 100%);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #login-page::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(201,147,58,0.12);
+  }
+
+  #login-page::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: rgba(201,147,58,0.08);
+  }
+
+  .login-card {
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 20px;
+    padding: 44px 40px;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+  }
+
+  .login-logo {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .login-logo .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--red);
+    display: block;
+    line-height: 1.2;
+  }
+
+  .login-logo .brand span { color: var(--gold); }
+
+  .login-logo .tagline {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 6px;
+    display: block;
+  }
+
+  .login-logo .logo-icon {
+    font-size: 44px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .login-tabs {
+    display: flex;
+    background: var(--gray);
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 28px;
+    gap: 4px;
+  }
+
+  .login-tab {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .login-tab.active {
+    background: white;
+    color: var(--red);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  }
+
+  .login-form { display: none; }
+  .login-form.active { display: block; }
+
+  .login-field {
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .login-field label {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .login-field .field-wrap {
+    position: relative;
+  }
+
+  .login-field .field-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  .login-field input {
+    width: 100%;
+    padding: 11px 14px 11px 38px;
+    border: 1.5px solid var(--border);
+    border-radius: 9px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    background: white;
+    color: var(--text);
+    outline: none;
+    transition: border 0.2s;
+  }
+
+  .login-field input:focus { border-color: var(--red); }
+
+  .login-field .err {
+    font-size: 12px;
+    color: #c0392b;
+    margin-top: 4px;
+    display: none;
+  }
+
+  .login-field.invalid input { border-color: #c0392b; }
+  .login-field.invalid .err { display: block; }
+
+  .forgot-link {
+    text-align: right;
+    margin-bottom: 20px;
+    margin-top: -8px;
+  }
+
+  .forgot-link a {
+    font-size: 12px;
+    color: var(--gold);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .forgot-link a:hover { text-decoration: underline; }
+
+  .login-btn, .guest-btn, .proceed-btn, .cta-btn {
+    width: 100%;
+    border: none;
+    padding: 13px;
+    border-radius: 9px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .login-btn {
+    background: var(--red);
+    color: white;
+  }
+
+  .login-btn:hover { background: var(--red-light); }
+
+  .login-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .login-divider::before,
+  .login-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .guest-btn {
+    background: white;
+    color: var(--text);
+    border: 1.5px solid var(--border);
+    padding: 11px;
+  }
+
+  .guest-btn:hover { border-color: var(--red); color: var(--red); }
+
+  .terms-note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 20px;
+    line-height: 1.6;
+  }
+
+  #app { display: none; }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #8B0000 0%, #6f0000 100%);
+    color: white;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .logo span { color: var(--gold-light); }
+
+  .header-actions { display: flex; gap: 6px; align-items: center; }
+
+  .hbtn {
+    background: rgba(255,255,255,0.12);
+    border: none;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+    position: relative;
+  }
+
+  .hbtn:hover { background: rgba(255,255,255,0.22); }
+
+  .badge {
+    position: absolute;
+    top: -4px; right: -4px;
+    background: var(--gold);
+    color: white;
+    font-size: 10px;
+    font-weight: 500;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+  }
+
+  .user-chip {
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+  }
+
+  .user-chip:hover { background: rgba(255,255,255,0.25); }
+
+  nav {
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 24px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  nav::-webkit-scrollbar { display: none; }
+
+  .navlink {
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .navlink:hover { color: var(--red); }
+  .navlink.active { color: var(--red); border-bottom-color: var(--red); }
+
+  .section { display: none; padding: 32px 24px 100px; max-width: 960px; margin: 0 auto; }
+  .section.active { display: block; }
+
+  .hero {
+    background:
+      radial-gradient(circle at 20% 20%, rgba(255,255,255,0.13), transparent 18%),
+      radial-gradient(circle at 80% 30%, rgba(201,147,58,0.25), transparent 20%),
+      linear-gradient(135deg, var(--red) 0%, #5c0000 100%);
+    border-radius: var(--radius);
+    padding: 40px 36px;
+    color: white;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 18px 50px rgba(139,0,0,0.18);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(201,147,58,0.15);
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    margin-bottom: 8px;
+    position: relative;
+  }
+
+  .hero p { font-size: 15px; opacity: 0.85; line-height: 1.6; max-width: 520px; position: relative; }
+
+  .hero-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; position: relative; }
+
+  .hbadge {
+    background: rgba(255,255,255,0.15);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .cta-btn {
+    margin-top: 24px;
+    background: var(--gold);
+    color: white;
+    padding: 12px 26px;
+    border-radius: 8px;
+    font-size: 15px;
+  }
+
+  .cta-btn:hover { background: #b8822e; }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--red);
+    margin-bottom: 16px;
+  }
+
+  .highlights, .about-grid, .contact-grid, .ambassador-grid {
+    display: grid;
+    gap: 14px;
+  }
+
+  .highlights { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); margin-bottom: 32px; }
+  .highlight-card {
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(226,213,190,0.9);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .highlight-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .highlight-card .icon { font-size: 28px; margin-bottom: 8px; }
+  .highlight-card h4 { font-size: 14px; font-weight: 500; color: var(--text); }
+  .highlight-card p { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }
+
+  .menu-search { display: flex; gap: 10px; margin-bottom: 20px; }
+  .menu-search input, .menu-filter select, .form-row input, .form-row select, .form-row textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    background: rgba(255,255,255,0.92);
+    color: var(--text);
+    outline: none;
+    transition: border 0.2s;
+  }
+
+  .menu-search input:focus, .menu-filter select:focus, .form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+    border-color: var(--red);
+  }
+
+  .menu-filter select { cursor: pointer; }
+
+  .card {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(226,213,190,0.95);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+
+  .card-img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    background: linear-gradient(135deg, #f7ead6, #fff6ea);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+  }
+
+  .card-body { padding: 12px; }
+  .card h4 { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .card .category { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .card .price { font-size: 17px; font-weight: 700; color: var(--red); margin-bottom: 10px; }
+  .card-actions { display: flex; gap: 6px; }
+
+  .btn-cart {
+    flex: 1;
+    background: var(--red);
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .btn-wish {
+    background: #fff0f0;
+    color: #c0392b;
+    border: 1px solid #ffd0d0;
+    width: 34px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-wish.wished { background: #c0392b; color: white; border-color: #c0392b; }
+
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
+  .empty-state .big-icon { font-size: 56px; margin-bottom: 12px; opacity: 0.3; }
+  .empty-state h3 { font-size: 18px; margin-bottom: 6px; }
+  .empty-state p { font-size: 14px; }
+
+  .cart-item, .order-card, .about-card, .contact-card, .form-section, .pay-details, .success-box, .ambassador-card {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(226,213,190,0.95);
+  }
+
+  .cart-item {
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+
+  .cart-item-icon { font-size: 32px; }
+  .cart-item-info { flex: 1; }
+  .cart-item-info h4 { font-size: 15px; font-weight: 500; }
+  .cart-item-info .price { font-size: 14px; color: var(--red); margin-top: 2px; }
+
+  .qty-control { display: flex; align-items: center; gap: 8px; }
+
+  .qty-btn {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: white;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .qty-num { font-weight: 500; font-size: 15px; min-width: 20px; text-align: center; }
+  .remove-btn { background: none; border: none; color: #c0392b; cursor: pointer; font-size: 16px; padding: 4px; }
+
+  .cart-summary {
+    background: rgba(255,255,255,0.92);
+    border: 1px solid rgba(226,213,190,0.95);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-top: 16px;
+  }
+
+  .summary-row { display: flex; justify-content: space-between; font-size: 14px; padding: 6px 0; color: var(--muted); }
+  .summary-row.total { border-top: 1px solid var(--border); margin-top: 8px; padding-top: 12px; font-size: 18px; font-weight: 700; color: var(--text); }
+
+  .proceed-btn {
+    background: linear-gradient(135deg, var(--red), #5c0000);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 14px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .form-section {
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+
+  .form-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 18px;
+    color: var(--red);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .form-row { margin-bottom: 14px; }
+
+  .form-row label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 5px; font-weight: 500; }
+
+  .form-row .err {
+    font-size: 12px;
+    color: #c0392b;
+    margin-top: 4px;
+    display: none;
+  }
+
+  .form-row.invalid input, .form-row.invalid select { border-color: #c0392b; }
+  .form-row.invalid .err { display: block; }
+  .form-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .pay-methods { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+
+  .pay-option {
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .pay-option.selected { border-color: var(--red); background: #fff5f5; }
+
+  .pay-option .pay-icon { font-size: 24px; }
+  .pay-option .pay-label { font-weight: 500; font-size: 15px; }
+  .pay-option .pay-desc { font-size: 12px; color: var(--muted); }
+  .pay-option .pay-radio { margin-left: auto; width: 18px; height: 18px; accent-color: var(--red); }
+
+  .pay-details {
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-top: 10px;
+  }
+
+  .upi-id {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--red);
+    text-align: center;
+    letter-spacing: 1px;
+    margin-top: 10px;
+  }
+
+  .upi-qr {
+    width: 140px; height: 140px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 12px auto;
+    font-size: 48px;
+  }
+
+  #toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #1a1209;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 999;
+    white-space: nowrap;
+  }
+
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .success-box { text-align: center; padding: 60px 20px; border-radius: var(--radius); }
+
+  .success-icon {
+    width: 80px; height: 80px;
+    background: #eafaf1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    margin: 0 auto 20px;
+    color: var(--green);
+    border: 2px solid #abebc6;
+  }
+
+  .success-box h2 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--green); margin-bottom: 10px; }
+  .success-box p { color: var(--muted); font-size: 15px; line-height: 1.7; margin-bottom: 6px; }
+
+  .order-id {
+    background: var(--gray);
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 14px;
+    margin: 16px auto;
+    max-width: 300px;
+    color: var(--muted);
+  }
+
+  .order-id strong { color: var(--text); font-size: 16px; display: block; }
+
+  .order-card { border-radius: var(--radius); padding: 16px; margin-bottom: 12px; }
+  .order-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .order-status { font-size: 12px; padding: 4px 10px; border-radius: 20px; font-weight: 500; }
+  .status-placed { background: #e8f4fd; color: #1a6fa8; }
+  .status-processing { background: #fff4e5; color: #b77700; }
+  .status-dispatched { background: #f0e7ff; color: #6a35a8; }
+  .status-out_for_delivery { background: #fff0f0; color: #c0392b; }
+  .status-delivered { background: #eafaf1; color: #1a6636; }
+  .order-items-list { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  .order-footer { display: flex; justify-content: space-between; font-size: 14px; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 10px; }
+
+  .tracking-box {
+    margin-top: 12px;
+    background: rgba(255,248,237,0.95);
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    padding: 14px;
+  }
+
+  .track-line {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .track-line:last-child { margin-bottom: 0; }
+
+  .track-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin-top: 3px;
+    background: #ddd;
+    flex-shrink: 0;
+  }
+
+  .track-line.done .track-dot { background: var(--green); }
+  .track-line.active .track-dot { background: var(--gold); box-shadow: 0 0 0 4px rgba(201,147,58,0.15); }
+
+  .track-line strong { color: var(--text); display: block; margin-bottom: 2px; }
+
+  .ambassador-section { margin: 32px 0 24px; }
+  .ambassador-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); margin-top: 16px; }
+
+  .ambassador-card {
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ambassador-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--red), var(--gold));
+  }
+
+  .ambassador-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(139,0,0,0.12); }
+
+  .ambassador-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    border: 3px solid var(--gold-light);
+  }
+
+  .ambassador-avatar.srija { background: linear-gradient(135deg, #8B0000, #c9933a); }
+  .ambassador-avatar.manasa { background: linear-gradient(135deg, #6a0dad, #8B0000); }
+  .ambassador-avatar.amrutha { background: linear-gradient(135deg, #1a6636, #8B0000); }
+
+  .ambassador-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .ambassador-role {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .ambassador-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .ambassador-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #fff5e6;
+    color: var(--gold);
+    border: 1px solid #f5d9a0;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 500;
+    margin-top: 12px;
+  }
+
+  .about-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    margin-bottom: 24px;
+  }
+
+  .about-card {
+    border-radius: var(--radius);
+    padding: 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .about-card .icon {
+    font-size: 24px;
+    background: #fff5f5;
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .about-card h4 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .about-card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  .contact-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    margin-bottom: 24px;
+  }
+
+  .contact-card { border-radius: var(--radius); padding: 20px; text-align: center; }
+  .contact-card .icon { font-size: 28px; margin-bottom: 10px; }
+  .contact-card h4 { font-size: 14px; color: var(--muted); margin-bottom: 6px; }
+  .contact-card p { font-size: 15px; font-weight: 500; }
+
+  .msg-sent {
+    background: #eafaf1;
+    border: 1px solid #abebc6;
+    border-radius: var(--radius);
+    padding: 14px;
+    color: var(--green);
+    font-size: 14px;
+    text-align: center;
+    margin-top: 12px;
+    display: none;
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border);
+    padding: 10px 24px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    z-index: 50;
+  }
+
+  .stepper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 28px;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.9);
+  }
+
+  .step {
+    flex: 1;
+    padding: 12px 6px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    color: var(--muted);
+    background: white;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    border-right: 1px solid var(--border);
+  }
+
+  .step:last-child { border-right: none; }
+  .step .step-num { font-size: 16px; }
+  .step.active { background: var(--red); color: white; }
+  .step.done { background: var(--gray); color: var(--green); }
+
+  .track-card {
+    margin-top: 16px;
+    background: rgba(255,255,255,0.92);
+    border: 1px solid rgba(226,213,190,0.95);
+    border-radius: var(--radius);
+    padding: 18px;
+  }
+
+  .track-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  .track-progress {
+    height: 10px;
+    border-radius: 999px;
+    background: #f0e4d2;
+    overflow: hidden;
+    margin-top: 10px;
+  }
+
+  .track-progress > div {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--gold), var(--red));
+    border-radius: 999px;
+    transition: width 0.4s ease;
+  }
+
+  @media (max-width: 600px) {
+    .form-2col { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 24px; }
+    .section { padding: 20px 16px 100px; }
+    .login-card { padding: 32px 24px; }
+    .ambassador-grid { grid-template-columns: 1fr; }
+    header { padding: 0 12px; }
+    .header-actions { gap: 4px; }
+    .hbtn, .user-chip { padding: 7px 10px; font-size: 12px; }
+    .logo { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="login-page">
+  <div class="login-card">
+    <div class="login-logo">
+      <span class="logo-icon">🍲</span>
+      <span class="brand">Telugu <span>Aahara</span> Vedhika</span>
+      <span class="tagline">Authentic Andhra & Telangana Homemade Foods</span>
+    </div>
+
+    <div class="login-tabs">
+      <button class="login-tab active" onclick="switchTab('login')">Sign In</button>
+      <button class="login-tab" onclick="switchTab('register')">Register</button>
+    </div>
+
+    <div id="login-form" class="login-form active">
+      <div class="login-field" id="lf-email">
+        <label>Email / Phone</label>
+        <div class="field-wrap">
+          <i class="fa-solid fa-user field-icon"></i>
+          <input type="text" id="l-email" placeholder="Enter email or phone number">
+        </div>
+        <div class="err">Please enter your email or phone</div>
+      </div>
+      <div class="login-field" id="lf-pass">
+        <label>Password</label>
+        <div class="field-wrap">
+          <i class="fa-solid fa-lock field-icon"></i>
+          <input type="password" id="l-pass" placeholder="Enter your password">
+        </div>
+        <div class="err">Please enter your password</div>
+      </div>
+      <div class="forgot-link"><a>Forgot Password?</a></div>
+      <button class="login-btn" onclick="doLogin()">
+        <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In
+      </button>
+      <div class="login-divider">or</div>
+      <button class="guest-btn" onclick="guestLogin()">
+        <i class="fa-solid fa-user-secret"></i> Continue as Guest
+      </button>
+    </div>
+
+    <div id="register-form" class="login-form">
+      <div class="login-field" id="rf-name">
+        <label>Full Name</label>
+        <div class="field-wrap">
+          <i class="fa-solid fa-user field-icon"></i>
+          <input type="text" id="r-name" placeholder="Your full name">
+        </div>
+        <div class="err">Please enter your name</div>
+      </div>
+      <div class="login-field" id="rf-phone">
+        <label>Phone Number</label>
+        <div class="field-wrap">
+          <i class="fa-solid fa-phone field-icon"></i>
+          <input type="tel" id="r-phone" placeholder="10-digit mobile number">
+        </div>
+        <div class="err">Enter valid 10-digit number</div>
+      </div>
+      <div class="login-field" id="rf-email">
+        <label>Email Address</label>
+        <div class="field-wrap">
+          <i class="fa-solid fa-envelope field-icon"></i>
+          <input type="email" id="r-email" placeholder="your@email.com">
+        </div>
+        <div class="err">Enter a valid email</div>
+      </div>
+      <div class="login-field" id="rf-pass">
+        <label>Create Password</label>
+        <div class="field-wrap">
+          <i class="fa-solid fa-lock field-icon"></i>
+          <input type="password" id="r-pass" placeholder="Minimum 6 characters">
+        </div>
+        <div class="err">Password must be at least 6 characters</div>
+      </div>
+      <button class="login-btn" onclick="doRegister()">
+        <i class="fa-solid fa-user-plus"></i> Create Account
+      </button>
+      <div class="login-divider">or</div>
+      <button class="guest-btn" onclick="guestLogin()">
+        <i class="fa-solid fa-user-secret"></i> Continue as Guest
+      </button>
+    </div>
+
+    <div class="terms-note">By continuing, you agree to our Terms of Service and Privacy Policy.</div>
+  </div>
+</div>
+
+<div id="app">
+<header>
+  <div class="logo">Telugu <span>Aahara</span> Vedhika</div>
+  <div class="header-actions">
+    <button class="hbtn" onclick="nav('wishlist')">
+      <i class="fa-solid fa-heart"></i>
+      <span class="badge" id="wish-badge">0</span>
+    </button>
+    <button class="hbtn" onclick="nav('cart')">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span class="badge" id="cart-badge">0</span>
+    </button>
+    <button class="hbtn" onclick="nav('orders')">
+      <i class="fa-solid fa-box"></i> Orders
+    </button>
+    <button class="user-chip" id="user-chip" onclick="doLogout()">
+      <i class="fa-solid fa-circle-user"></i>
+      <span id="user-name-display">Guest</span>
+      <i class="fa-solid fa-arrow-right-from-bracket" style="font-size:11px;opacity:0.7"></i>
+    </button>
+  </div>
+</header>
+
+<nav id="main-nav">
+  <button class="navlink active" onclick="nav('home')"><i class="fa-solid fa-house"></i> Home</button>
+  <button class="navlink" onclick="nav('about')"><i class="fa-solid fa-circle-info"></i> About</button>
+  <button class="navlink" onclick="nav('menu')"><i class="fa-solid fa-utensils"></i> Menu</button>
+  <button class="navlink" onclick="nav('wishlist')"><i class="fa-solid fa-heart"></i> Wishlist</button>
+  <button class="navlink" onclick="nav('cart')"><i class="fa-solid fa-cart-shopping"></i> Cart</button>
+  <button class="navlink" onclick="nav('orders')"><i class="fa-solid fa-box"></i> Orders</button>
+  <button class="navlink" onclick="nav('contact')"><i class="fa-solid fa-phone"></i> Contact</button>
+</nav>
+
+<section id="home" class="section active">
+  <div class="hero">
+    <h1>Telugu Aahara Vedhika 🍲</h1>
+    <p>Homemade traditional Andhra & Telangana flavors delivered to your doorstep. Every product crafted with authentic recipes and pure ingredients.</p>
+    <div class="hero-badges">
+      <span class="hbadge"><i class="fa-solid fa-leaf"></i> 100% Homemade</span>
+      <span class="hbadge"><i class="fa-solid fa-truck"></i> 3-5 Days Delivery</span>
+      <span class="hbadge"><i class="fa-solid fa-shield-halved"></i> Hygienic</span>
+    </div>
+    <button class="cta-btn" onclick="nav('menu')"><i class="fa-solid fa-utensils"></i> Explore Menu</button>
+  </div>
+
+  <h2 class="section-title">✨ Why Choose Us?</h2>
+  <div class="highlights">
+    <div class="highlight-card"><div class="icon">🥭</div><h4>Authentic Pickles</h4><p>Traditional Andhra recipes</p></div>
+    <div class="highlight-card"><div class="icon">🍬</div><h4>Homemade Sweets</h4><p>Pootharekulu & more</p></div>
+    <div class="highlight-card"><div class="icon">🌿</div><h4>Pure Ingredients</h4><p>No preservatives</p></div>
+    <div class="highlight-card"><div class="icon">🚚</div><h4>Fast Delivery</h4><p>Guntur, Vijayawada +</p></div>
+  </div>
+
+  <h2 class="section-title">🔥 Popular Items</h2>
+  <div class="highlights" id="popular-grid"></div>
+</section>
+
+<section id="about" class="section">
+  <h2 class="section-title" style="margin-bottom:20px">About Telugu Aahara Vedhika</h2>
+  <div class="form-section" style="margin-bottom:20px">
+    <p style="font-size:15px;line-height:1.8;color:var(--muted)">Telugu Aahara Vedhika brings authentic Andhra and Telangana homemade food to your doorstep. Our mission is to preserve traditional recipes and deliver them with love, hygiene, and the taste of home.</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-card"><div class="icon">🌿</div><div><h4>100% Homemade</h4><p>Every product prepared fresh with traditional methods</p></div></div>
+    <div class="about-card"><div class="icon">🥭</div><div><h4>Traditional Recipes</h4><p>Passed down through generations</p></div></div>
+    <div class="about-card"><div class="icon">🧑‍🍳</div><div><h4>Hygienic Preparation</h4><p>Prepared in clean, hygienic conditions</p></div></div>
+    <div class="about-card"><div class="icon">🚚</div><div><h4>Quick Delivery</h4><p>3-5 days to Guntur, Vijayawada, Tenali & more</p></div></div>
+    <div class="about-card"><div class="icon">💯</div><div><h4>No Preservatives</h4><p>Natural ingredients, pure taste</p></div></div>
+    <div class="about-card"><div class="icon">🤝</div><div><h4>Customer First</h4><p>Satisfaction guaranteed on every order</p></div></div>
+  </div>
+
+  <div class="ambassador-section">
+    <h2 class="section-title">⭐ Our Brand Ambassadors</h2>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:4px">The faces who carry our tradition forward with passion and pride.</p>
+    <div class="ambassador-grid">
+      <div class="ambassador-card">
+        <div class="ambassador-avatar srija">S</div>
+        <h3>Srija</h3>
+        <div class="ambassador-role">Brand Ambassador</div>
+        <p>A passionate advocate for authentic Telugu cuisine, Srija brings warmth and tradition to every interaction. Her love for homemade pickles is contagious!</p>
+        <div class="ambassador-badge"><i class="fa-solid fa-star" style="font-size:10px"></i> Ambassador since 2024</div>
+      </div>
+      <div class="ambassador-card">
+        <div class="ambassador-avatar manasa">M</div>
+        <h3>Manasa</h3>
+        <div class="ambassador-role">Brand Ambassador</div>
+        <p>Manasa's deep-rooted connection to Andhra culture makes her the perfect voice for Telugu Aahara Vedhika. She champions purity in every dish.</p>
+        <div class="ambassador-badge"><i class="fa-solid fa-star" style="font-size:10px"></i> Ambassador since 2024</div>
+      </div>
+      <div class="ambassador-card">
+        <div class="ambassador-avatar amrutha">A</div>
+        <h3>Amrutha</h3>
+        <div class="ambassador-role">Brand Ambassador</div>
+        <p>With her vibrant energy and love for traditional Telangana sweets, Amrutha inspires communities to embrace the richness of homemade flavors.</p>
+        <div class="ambassador-badge"><i class="fa-solid fa-star" style="font-size:10px"></i> Ambassador since 2024</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="menu" class="section">
+  <h2 class="section-title">Our Menu</h2>
+  <div class="menu-search">
+    <input type="text" id="menu-search" placeholder="Search products..." oninput="renderMenu()">
+    <div class="menu-filter">
+      <select id="menu-filter" onchange="renderMenu()">
+        <option value="">All Categories</option>
+        <option value="pickle">Pickles</option>
+        <option value="sweet">Sweets</option>
+        <option value="snack">Snacks</option>
+      </select>
+    </div>
+  </div>
+  <div class="menu-grid" id="menu-grid"></div>
+</section>
+
+<section id="wishlist" class="section">
+  <h2 class="section-title">My Wishlist ❤️</h2>
+  <div id="wishlist-content"></div>
+</section>
+
+<section id="cart" class="section">
+  <h2 class="section-title">Your Cart</h2>
+  <div id="cart-content"></div>
+</section>
+
+<section id="billing" class="section">
+  <h2 class="section-title">Checkout</h2>
+  <div class="stepper">
+    <div class="step done"><span class="step-num">✓</span>Cart</div>
+    <div class="step active"><span class="step-num">2</span>Billing</div>
+    <div class="step"><span class="step-num">3</span>Payment</div>
+    <div class="step"><span class="step-num">4</span>Confirm</div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-title"><i class="fa-solid fa-user"></i> Personal Details</div>
+    <div class="form-2col">
+      <div class="form-row" id="fr-name">
+        <label>Full Name *</label>
+        <input type="text" id="b-name" placeholder="Your full name">
+        <div class="err">Please enter your name</div>
+      </div>
+      <div class="form-row" id="fr-phone">
+        <label>Phone Number *</label>
+        <input type="tel" id="b-phone" placeholder="10-digit mobile number">
+        <div class="err">Enter valid 10-digit number</div>
+      </div>
+    </div>
+    <div class="form-row" id="fr-email">
+      <label>Email Address</label>
+      <input type="email" id="b-email" placeholder="Optional">
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-title"><i class="fa-solid fa-location-dot"></i> Delivery Address</div>
+    <div class="form-row" id="fr-addr">
+      <label>Full Address *</label>
+      <input type="text" id="b-addr" placeholder="House no., street, area">
+      <div class="err">Please enter your address</div>
+    </div>
+    <div class="form-2col">
+      <div class="form-row" id="fr-city">
+        <label>City *</label>
+        <select id="b-city">
+          <option value="">Select City</option>
+          <option>Guntur</option>
+          <option>Vijayawada</option>
+          <option>Tenali</option>
+          <option>Amaravati</option>
+          <option>Mangalagiri</option>
+        </select>
+        <div class="err">Please select city</div>
+      </div>
+      <div class="form-row" id="fr-pin">
+        <label>Pincode *</label>
+        <input type="text" id="b-pin" placeholder="6-digit pincode">
+        <div class="err">Enter valid 6-digit pincode</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:4px"><i class="fa-solid fa-clock"></i> Estimated Delivery: <strong>3–5 Business Days</strong></p>
+  </div>
+
+  <button class="proceed-btn" onclick="validateBilling()"><i class="fa-solid fa-arrow-right"></i> Continue to Payment</button>
+</section>
+
+<section id="payment" class="section">
+  <h2 class="section-title">Payment</h2>
+  <div class="stepper">
+    <div class="step done"><span class="step-num">✓</span>Cart</div>
+    <div class="step done"><span class="step-num">✓</span>Billing</div>
+    <div class="step active"><span class="step-num">3</span>Payment</div>
+    <div class="step"><span class="step-num">4</span>Confirm</div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-title"><i class="fa-solid fa-credit-card"></i> Choose Payment Method</div>
+    <div class="pay-methods">
+      <div class="pay-option" onclick="selectPay('upi')">
+        <span class="pay-icon">📱</span>
+        <div><div class="pay-label">UPI Payment</div><div class="pay-desc">PhonePe, GPay, Paytm</div></div>
+        <input type="radio" class="pay-radio" name="pay" id="r-upi">
+      </div>
+      <div class="pay-option" onclick="selectPay('cod')">
+        <span class="pay-icon">💵</span>
+        <div><div class="pay-label">Cash on Delivery</div><div class="pay-desc">Pay when order arrives</div></div>
+        <input type="radio" class="pay-radio" name="pay" id="r-cod">
+      </div>
+      <div class="pay-option" onclick="selectPay('card')">
+        <span class="pay-icon">💳</span>
+        <div><div class="pay-label">Debit / Credit Card</div><div class="pay-desc">Visa, Mastercard, RuPay</div></div>
+        <input type="radio" class="pay-radio" name="pay" id="r-card">
+      </div>
+    </div>
+
+    <div id="pay-upi" class="pay-details" style="display:none">
+      <p style="font-size:14px;color:var(--muted);text-align:center">Scan QR code or pay to UPI ID</p>
+      <div class="upi-qr">📲</div>
+      <div class="upi-id">teluguaahara@upi</div>
+      <button class="proceed-btn" style="margin-top:14px" onclick="placeOrder()"><i class="fa-solid fa-check"></i> I Have Paid</button>
+    </div>
+
+    <div id="pay-cod" class="pay-details" style="display:none">
+      <p style="font-size:14px;color:var(--muted)">💵 Cash will be collected at the time of delivery. No prepayment needed.</p>
+      <button class="proceed-btn" style="margin-top:14px" onclick="placeOrder()"><i class="fa-solid fa-bag-shopping"></i> Place Order</button>
+    </div>
+
+    <div id="pay-card" class="pay-details" style="display:none">
+      <div class="form-row" id="fr-card">
+        <label>Card Number</label>
+        <input type="text" id="p-card" placeholder="1234 5678 9012 3456" maxlength="19" oninput="fmtCard(this)">
+        <div class="err">Enter valid card number</div>
+      </div>
+      <div class="form-2col">
+        <div class="form-row" id="fr-exp">
+          <label>Expiry</label>
+          <input type="text" id="p-exp" placeholder="MM/YY" maxlength="5">
+          <div class="err">Enter valid expiry</div>
+        </div>
+        <div class="form-row" id="fr-cvv">
+          <label>CVV</label>
+          <input type="password" id="p-cvv" placeholder="•••" maxlength="3">
+          <div class="err">Enter 3-digit CVV</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Name on Card</label>
+        <input type="text" id="p-name" placeholder="As printed on card">
+      </div>
+      <button class="proceed-btn" onclick="validateCard()"><i class="fa-solid fa-lock"></i> Pay Securely</button>
+    </div>
+  </div>
+</section>
+
+<section id="success" class="section">
+  <div class="stepper">
+    <div class="step done"><span>✓</span>Cart</div>
+    <div class="step done"><span>✓</span>Billing</div>
+    <div class="step done"><span>✓</span>Payment</div>
+    <div class="step active"><span>4</span>Confirm</div>
+  </div>
+  <div class="success-box">
+    <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+    <h2>Order Confirmed! 🎉</h2>
+    <p>Thank you for ordering from Telugu Aahara Vedhika.</p>
+    <p>Your homemade delicacies are being packed with love.</p>
+    <div class="order-id">Order ID<strong id="conf-order-id">—</strong></div>
+    <p style="font-size:13px;color:var(--muted)">Estimated delivery in <strong>3–5 business days</strong></p>
+    <button class="proceed-btn" style="max-width:260px;margin:20px auto 0" onclick="nav('orders')"><i class="fa-solid fa-box"></i> View My Orders</button>
+  </div>
+</section>
+
+<section id="orders" class="section">
+  <h2 class="section-title">My Orders</h2>
+  <div id="orders-content"></div>
+</section>
+
+<section id="contact" class="section">
+  <h2 class="section-title">Contact Us</h2>
+  <div class="contact-grid">
+    <div class="contact-card"><div class="icon">📧</div><h4>Email</h4><p>teluguaaharavedhika@gmail.com</p></div>
+    <div class="contact-card"><div class="icon">📞</div><h4>Phone</h4><p>+91 9912086495</p></div>
+    <div class="contact-card"><div class="icon">📍</div><h4>Delivery Areas</h4><p>Guntur, Vijayawada, Tenali, Amaravati, Mangalagiri</p></div>
+    <div class="contact-card"><div class="icon">🕐</div><h4>Business Hours</h4><p>Mon–Sat, 9 AM – 7 PM</p></div>
+  </div>
+  <div class="form-section">
+    <div class="form-title"><i class="fa-solid fa-envelope"></i> Send a Message</div>
+    <div class="form-row"><label>Name</label><input type="text" id="c-name" placeholder="Your name"></div>
+    <div class="form-row"><label>Phone</label><input type="tel" id="c-phone" placeholder="Mobile number"></div>
+    <div class="form-row"><label>Message</label><textarea id="c-msg" rows="4" placeholder="Your query..." style="resize:vertical"></textarea></div>
+    <button class="proceed-btn" onclick="sendMsg()"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+    <div class="msg-sent" id="msg-sent"><i class="fa-solid fa-circle-check"></i> Message sent! We'll get back to you shortly.</div>
+  </div>
+</section>
+
+<footer>© 2026 Telugu Aahara Vedhika &nbsp;|&nbsp; Authentic Andhra & Telangana Homemade Foods</footer>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const MENU = [
+  { id:1, name:'Mango Pickle', category:'pickle', price:250, emoji:'🥭', desc:'Spicy Andhra style raw mango pickle' },
+  { id:2, name:'Lemon Pickle', category:'pickle', price:200, emoji:'🍋', desc:'Tangy & spicy lemon pickle' },
+  { id:3, name:'Gongura Pickle', category:'pickle', price:230, emoji:'🌿', desc:'Classic sorrel leaf pickle from Andhra' },
+  { id:4, name:'Tomato Pickle', category:'pickle', price:180, emoji:'🍅', desc:'Tangy homemade tomato pickle' },
+  { id:5, name:'Pootharekulu', category:'sweet', price:400, emoji:'🍬', desc:'Paper-thin sweet rice sheets with jaggery' },
+  { id:6, name:'Bobbatlu', category:'sweet', price:350, emoji:'🫓', desc:'Stuffed sweet flatbread with chana dal' },
+  { id:7, name:'Murukulu', category:'snack', price:180, emoji:'🌀', desc:'Crispy spiral rice flour snack' },
+  { id:8, name:'Chegodilu', category:'snack', price:160, emoji:'🍩', desc:'Crunchy ring-shaped snack with sesame' },
+  { id:9, name:'Garelu', category:'snack', price:200, emoji:'🧆', desc:'Deep-fried urad dal vada' },
+];
+
+let currentUser = null;
+let cart = load('tav_cart');
+let wishlist = load('tav_wish');
+let orders = load('tav_orders');
+
+function load(key){ try{ return JSON.parse(localStorage.getItem(key))||[] }catch(e){ return [] } }
+function save(key, val){ localStorage.setItem(key, JSON.stringify(val)) }
+
+function switchTab(tab) {
+  document.querySelectorAll('.login-tab').forEach((t,i)=>{
+    t.classList.toggle('active', (tab==='login'&&i===0)||(tab==='register'&&i===1));
+  });
+  document.getElementById('login-form').classList.toggle('active', tab==='login');
+  document.getElementById('register-form').classList.toggle('active', tab==='register');
+}
+
+function doLogin() {
+  const email = document.getElementById('l-email').value.trim();
+  const pass = document.getElementById('l-pass').value.trim();
+  const ef = document.getElementById('lf-email');
+  const pf = document.getElementById('lf-pass');
+  ef.classList.toggle('invalid', !email);
+  pf.classList.toggle('invalid', !pass);
+  if(!email || !pass) return;
+
+  const users = load('tav_users');
+  const user = users.find(u => (u.email === email || u.phone === email) && u.password === pass);
+  if(!user) {
+    ef.classList.add('invalid');
+    ef.querySelector('.err').textContent = 'Invalid email/phone or password';
+    return;
+  }
+  loginSuccess(user.name);
+}
+
+function doRegister() {
+  const name = document.getElementById('r-name').value.trim();
+  const phone = document.getElementById('r-phone').value.trim();
+  const email = document.getElementById('r-email').value.trim();
+  const pass = document.getElementById('r-pass').value.trim();
+
+  document.getElementById('rf-name').classList.toggle('invalid', name.length < 2);
+  document.getElementById('rf-phone').classList.toggle('invalid', !/^[6-9]\d{9}$/.test(phone));
+  document.getElementById('rf-email').classList.toggle('invalid', !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+  document.getElementById('rf-pass').classList.toggle('invalid', pass.length < 6);
+
+  if(name.length < 2 || !/^[6-9]\d{9}$/.test(phone) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || pass.length < 6) return;
+
+  const users = load('tav_users');
+  if(users.find(u => u.email === email)) {
+    document.getElementById('rf-email').classList.add('invalid');
+    document.getElementById('rf-email').querySelector('.err').textContent = 'Email already registered';
+    return;
+  }
+  users.push({ name, phone, email, password: pass });
+  save('tav_users', users);
+  toast('✅ Account created! Please sign in.');
+  switchTab('login');
+}
+
+function guestLogin() { loginSuccess('Guest'); }
+
+function loginSuccess(name) {
+  currentUser = name;
+  document.getElementById('user-name-display').textContent = name.split(' ')[0];
+  document.getElementById('login-page').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  updateBadges();
+  renderMenu();
+  renderPopular();
+}
+
+function doLogout() {
+  if(!confirm('Sign out from Telugu Aahara Vedhika?')) return;
+  currentUser = null;
+  document.getElementById('login-page').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('l-email').value = '';
+  document.getElementById('l-pass').value = '';
+}
+
+function nav(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  const target = document.getElementById(id);
+  if(target) target.classList.add('active');
+  document.querySelectorAll('.navlink').forEach(n=>n.classList.remove('active'));
+  document.querySelectorAll('.navlink').forEach(n=>{ if(n.textContent.toLowerCase().includes(id.toLowerCase())) n.classList.add('active'); });
+  if(id==='cart') renderCart();
+  if(id==='wishlist') renderWishlist();
+  if(id==='orders') renderOrders();
+  if(id==='menu') renderMenu();
+  if(id==='home') renderPopular();
+  window.scrollTo(0,0);
+}
+
+function updateBadges(){
+  const cartCount = cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cart-badge').textContent = cartCount;
+  document.getElementById('wish-badge').textContent = wishlist.length;
+}
+
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+function addToCart(id){
+  const item = cart.find(i=>i.id===id);
+  if(item){ item.qty++; } else { cart.push({id, qty:1}); }
+  save('tav_cart', cart);
+  updateBadges();
+  const p = MENU.find(m=>m.id===id);
+  toast(p.emoji+' '+p.name+' added to cart!');
+}
+
+function removeFromCart(id){
+  cart = cart.filter(i=>i.id!==id);
+  save('tav_cart', cart);
+  updateBadges();
+  renderCart();
+}
+
+function changeQty(id, delta){
+  const item = cart.find(i=>i.id===id);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty <= 0){ removeFromCart(id); return; }
+  save('tav_cart', cart);
+  updateBadges();
+  renderCart();
+}
+
+function toggleWish(id){
+  if(wishlist.includes(id)){
+    wishlist = wishlist.filter(w=>w!==id);
+    toast('Removed from wishlist');
+  } else {
+    wishlist.push(id);
+    const p=MENU.find(m=>m.id===id);
+    toast('❤️ '+p.name+' added to wishlist!');
+  }
+  save('tav_wish', wishlist);
+  updateBadges();
+  renderMenu();
+}
+
+function renderMenu(){
+  const search = (document.getElementById('menu-search')||{}).value?.toLowerCase()||'';
+  const filter = (document.getElementById('menu-filter')||{}).value||'';
+  const grid = document.getElementById('menu-grid');
+  if(!grid) return;
+  const filtered = MENU.filter(p=>{
+    return (!search || p.name.toLowerCase().includes(search) || p.desc.toLowerCase().includes(search))
+        && (!filter || p.category===filter);
+  });
+  grid.innerHTML = filtered.map(p=>`
+    <div class="card">
+      <div class="card-img">${p.emoji}</div>
+      <div class="card-body">
+        <div class="category">${p.category}</div>
+        <h4>${p.name}</h4>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:8px">${p.desc}</p>
+        <div class="price">₹${p.price}</div>
+        <div class="card-actions">
+          <button class="btn-cart" onclick="addToCart(${p.id})"><i class="fa-solid fa-cart-plus"></i> Add</button>
+          <button class="btn-wish ${wishlist.includes(p.id)?'wished':''}" onclick="toggleWish(${p.id})"><i class="fa-solid fa-heart"></i></button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  if(!filtered.length) grid.innerHTML = '<p style="color:var(--muted);padding:20px">No products found.</p>';
+}
+
+function renderPopular(){
+  const popular = [MENU[0], MENU[2], MENU[4], MENU[6]];
+  const g = document.getElementById('popular-grid');
+  if(!g) return;
+  g.innerHTML = popular.map(p=>`
+    <div class="highlight-card" style="cursor:pointer" onclick="nav('menu')">
+      <div class="icon">${p.emoji}</div>
+      <h4>${p.name}</h4>
+      <p>₹${p.price}</p>
+    </div>
+  `).join('');
+}
+
+function renderCart(){
+  const el = document.getElementById('cart-content');
+  if(!el) return;
+  if(!cart.length){
+    el.innerHTML = `<div class="empty-state"><div class="big-icon">🛒</div><h3>Your cart is empty</h3><p>Add items from the menu</p><br><button class="proceed-btn" style="max-width:200px;margin:0 auto" onclick="nav('menu')"><i class="fa-solid fa-utensils"></i> Browse Menu</button></div>`;
+    return;
+  }
+  const subtotal = cart.reduce((s,i)=>{ const p=MENU.find(m=>m.id===i.id); return s+p.price*i.qty; },0);
+  const delivery = subtotal > 500 ? 0 : 50;
+  const total = subtotal + delivery;
+  el.innerHTML = cart.map(i=>{
+    const p = MENU.find(m=>m.id===i.id);
+    return `<div class="cart-item">
+      <div class="cart-item-icon">${p.emoji}</div>
+      <div class="cart-item-info"><h4>${p.name}</h4><div class="price">₹${p.price} × ${i.qty} = ₹${p.price*i.qty}</div></div>
+      <div class="qty-control">
+        <button class="qty-btn" onclick="changeQty(${p.id},-1)">−</button>
+        <span class="qty-num">${i.qty}</span>
+        <button class="qty-btn" onclick="changeQty(${p.id},1)">+</button>
+      </div>
+      <button class="remove-btn" onclick="removeFromCart(${p.id})"><i class="fa-solid fa-trash"></i></button>
+    </div>`;
+  }).join('') + `
+  <div class="cart-summary">
+    <div class="summary-row"><span>Subtotal</span><span>₹${subtotal}</span></div>
+    <div class="summary-row"><span>Delivery Charges</span><span>${delivery===0?'<span style="color:var(--green)">FREE</span>':'₹'+delivery}</span></div>
+    ${delivery>0?'<div style="font-size:12px;color:var(--muted);padding:4px 0">Free delivery on orders above ₹500</div>':''}
+    <div class="summary-row total"><span>Total</span><span>₹${total}</span></div>
+    <button class="proceed-btn" onclick="nav('billing')"><i class="fa-solid fa-arrow-right"></i> Proceed to Checkout</button>
+  </div>`;
+}
+
+function renderWishlist(){
+  const el = document.getElementById('wishlist-content');
+  if(!el) return;
+  if(!wishlist.length){
+    el.innerHTML = `<div class="empty-state"><div class="big-icon">❤️</div><h3>Your wishlist is empty</h3><p>Heart items from the menu to save them here</p></div>`;
+    return;
+  }
+  el.innerHTML = '<div class="menu-grid">'+wishlist.map(id=>{
+    const p = MENU.find(m=>m.id===id);
+    if(!p) return '';
+    return `<div class="card">
+      <div class="card-img">${p.emoji}</div>
+      <div class="card-body">
+        <h4>${p.name}</h4>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:8px">${p.desc}</p>
+        <div class="price">₹${p.price}</div>
+        <div class="card-actions">
+          <button class="btn-cart" onclick="addToCart(${p.id})"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button>
+          <button class="btn-wish wished" onclick="toggleWish(${p.id});renderWishlist()"><i class="fa-solid fa-heart"></i></button>
+        </div>
+      </div>
+    </div>`;
+  }).join('')+'</div>';
+}
+
+function validateBilling(){
+  let valid = true;
+  function check(rowId, inputId, test){
+    const row = document.getElementById(rowId);
+    const val = document.getElementById(inputId).value.trim();
+    if(!test(val)){ row.classList.add('invalid'); valid=false; } else { row.classList.remove('invalid'); }
+  }
+  check('fr-name','b-name', v=>v.length>1);
+  check('fr-phone','b-phone', v=>/^[6-9]\d{9}$/.test(v));
+  check('fr-addr','b-addr', v=>v.length>5);
+  check('fr-city','b-city', v=>v!=='');
+  check('fr-pin','b-pin', v=>/^\d{6}$/.test(v));
+  if(valid) nav('payment');
+}
+
+function selectPay(method){
+  document.querySelectorAll('.pay-option').forEach(o=>o.classList.remove('selected'));
+  ['upi','cod','card'].forEach(m=>{ const box=document.getElementById('pay-'+m); if(box) box.style.display='none'; const r=document.getElementById('r-'+m); if(r) r.checked=false; });
+  const opts = document.querySelectorAll('.pay-option');
+  const idx = {upi:0,cod:1,card:2}[method];
+  opts[idx].classList.add('selected');
+  document.getElementById('r-'+method).checked=true;
+  document.getElementById('pay-'+method).style.display='block';
+}
+
+function fmtCard(el){
+  let v = el.value.replace(/\D/g,'').substring(0,16);
+  el.value = v.replace(/(.{4})/g,'$1 ').trim();
+}
+
+function validateCard(){
+  let valid=true;
+  function chk(rowId, inputId, test){ const row=document.getElementById(rowId); const val=document.getElementById(inputId).value.trim(); if(!test(val)){row.classList.add('invalid');valid=false;}else{row.classList.remove('invalid');} }
+  chk('fr-card','p-card',v=>v.replace(/\s/g,'').length===16);
+  chk('fr-exp','p-exp',v=>/^\d{2}\/\d{2}$/.test(v));
+  chk('fr-cvv','p-cvv',v=>/^\d{3}$/.test(v));
+  if(valid) placeOrder();
+}
+
+function getTrackSteps(status){
+  const map = {
+    placed: [
+      { title:'Order Placed', desc:'We have received your order.', state:'done' },
+      { title:'Packed', desc:'Packing in progress.', state:'pending' },
+      { title:'Dispatched', desc:'Out from our kitchen.', state:'pending' },
+      { title:'Out for Delivery', desc:'Courier is on the way.', state:'pending' },
+      { title:'Delivered', desc:'Delivered successfully.', state:'pending' },
+    ],
+    processing: [
+      { title:'Order Placed', desc:'We have received your order.', state:'done' },
+      { title:'Packed', desc:'Packing in progress.', state:'active' },
+      { title:'Dispatched', desc:'Out from our kitchen.', state:'pending' },
+      { title:'Out for Delivery', desc:'Courier is on the way.', state:'pending' },
+      { title:'Delivered', desc:'Delivered successfully.', state:'pending' },
+    ],
+    dispatched: [
+      { title:'Order Placed', desc:'We have received your order.', state:'done' },
+      { title:'Packed', desc:'Packing completed.', state:'done' },
+      { title:'Dispatched', desc:'Out from our kitchen.', state:'active' },
+      { title:'Out for Delivery', desc:'Courier is on the way.', state:'pending' },
+      { title:'Delivered', desc:'Delivered successfully.', state:'pending' },
+    ],
+    out_for_delivery: [
+      { title:'Order Placed', desc:'We have received your order.', state:'done' },
+      { title:'Packed', desc:'Packing completed.', state:'done' },
+      { title:'Dispatched', desc:'Out from our kitchen.', state:'done' },
+      { title:'Out for Delivery', desc:'Courier is on the way.', state:'active' },
+      { title:'Delivered', desc:'Delivered successfully.', state:'pending' },
+    ],
+    delivered: [
+      { title:'Order Placed', desc:'We have received your order.', state:'done' },
+      { title:'Packed', desc:'Packing completed.', state:'done' },
+      { title:'Dispatched', desc:'Out from our kitchen.', state:'done' },
+      { title:'Out for Delivery', desc:'Courier is on the way.', state:'done' },
+      { title:'Delivered', desc:'Delivered successfully.', state:'active' },
+    ]
+  };
+  return map[status] || map.placed;
+}
+
+function placeOrder(){
+  const subtotal = cart.reduce((s,i)=>{ const p=MENU.find(m=>m.id===i.id); return s+p.price*i.qty; },0);
+  const orderId = 'TAV' + Date.now().toString().slice(-6);
+  const billing = {
+    name: document.getElementById('b-name').value,
+    phone: document.getElementById('b-phone').value,
+    email: document.getElementById('b-email').value,
+    address: document.getElementById('b-addr').value,
+    city: document.getElementById('b-city').value,
+    pincode: document.getElementById('b-pin').value,
+  };
+  const order = {
+    id: orderId,
+    date: new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}),
+    items: cart.map(i=>{ const p=MENU.find(m=>m.id===i.id); return {name:p.name,qty:i.qty,price:p.price}; }),
+    billing,
+    total: subtotal + (subtotal>500?0:50),
+    status: 'placed'
+  };
+  orders.unshift(order);
+  save('tav_orders', orders);
+  cart = [];
+  save('tav_cart', cart);
+  updateBadges();
+  document.getElementById('conf-order-id').textContent = orderId;
+  nav('success');
+}
+
+function renderOrders(){
+  const el = document.getElementById('orders-content');
+  if(!el) return;
+  if(!orders.length){
+    el.innerHTML = `<div class="empty-state"><div class="big-icon">📦</div><h3>No orders yet</h3><p>Your order history will appear here</p><br><button class="proceed-btn" style="max-width:200px;margin:0 auto" onclick="nav('menu')"><i class="fa-solid fa-utensils"></i> Shop Now</button></div>`;
+    return;
+  }
+  el.innerHTML = orders.map(o=>{
+    const steps = getTrackSteps(o.status);
+    const progress = o.status==='placed'?20:o.status==='processing'?40:o.status==='dispatched'?65:o.status==='out_for_delivery'?85:100;
+    return `
+    <div class="order-card">
+      <div class="order-header">
+        <div>
+          <div style="font-weight:500;font-size:15px">${o.id}</div>
+          <div style="font-size:12px;color:var(--muted)">${o.date}</div>
+        </div>
+        <div class="order-status status-${o.status}">${o.status.replace('_',' ').toUpperCase()}</div>
+      </div>
+      <div class="order-items-list">${o.items.map(i=>i.name+' ×'+i.qty).join(', ')}</div>
+
+      <div class="tracking-box">
+        <div class="track-head">
+          <div>
+            <strong>Tracking Updates</strong>
+            <div style="font-size:12px;color:var(--muted)">Live order journey for your package</div>
+          </div>
+          <div style="font-size:12px;color:var(--gold);font-weight:600">${progress}%</div>
+        </div>
+        <div class="track-progress"><div style="width:${progress}%"></div></div>
+        <div style="margin-top:14px">
+          ${steps.map((s,i)=>`
+            <div class="track-line ${s.state}">
+              <div class="track-dot"></div>
+              <div>
+                <strong>${i+1}. ${s.title}</strong>
+                <div>${s.desc}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="order-footer">
+        <span style="color:var(--muted)">${o.billing.city}</span>
+        <span style="font-weight:500">₹${o.total}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function sendMsg(){
+  const name = document.getElementById('c-name').value.trim();
+  const phone = document.getElementById('c-phone').value.trim();
+  const msg = document.getElementById('c-msg').value.trim();
+  if(!name||!msg){ toast('Please fill name and message'); return; }
+  const msgs = load('tav_messages');
+  msgs.push({ name, phone, msg, date: new Date().toISOString() });
+  save('tav_messages', msgs);
+  document.getElementById('c-name').value='';
+  document.getElementById('c-phone').value='';
+  document.getElementById('c-msg').value='';
+  document.getElementById('msg-sent').style.display='block';
+  setTimeout(()=>document.getElementById('msg-sent').style.display='none', 4000);
+}
+
+renderPopular();
+updateBadges();
+</script>
+</body>
+</html>
